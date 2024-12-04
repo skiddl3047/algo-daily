@@ -10,19 +10,17 @@ Sort the array so that whenever nums[i] is odd, i is odd, and whenever nums[i] i
 Return any answer array that satisfies this condition.
 
 
-
 Example 1:
 
 Input: nums = [4,2,5,7]
 Output: [4,5,2,7]
 Explanation: [4,7,2,5], [2,5,4,7], [2,7,4,5] would also have been accepted.
-Example 2:
 
+Example 2:
 Input: nums = [2,3]
 Output: [2,3]
 
 Constraints:
-
 2 <= nums.length <= 2 * 104
 nums.length is even.
 Half of the integers in nums are even.
@@ -31,6 +29,8 @@ Half of the integers in nums are even.
  */
 public class SortArrayByParityII {
 
+    // start 'i' from 0th position and increment by 2
+    // if you find odd number in ith position, stop and  then start j from 1 and find a suitable odd number to swap
     public int[] sortArrayByParityII(int[] nums) {
         int j = 1;
         for (int i = 0; i < nums.length; i += 2)
@@ -38,7 +38,6 @@ public class SortArrayByParityII {
                 while (nums[j] % 2 == 1){
                     j += 2;
                 }
-
                 // Swap A[i] and A[j]
                 int tmp = nums[i];
                 nums[i] = nums[j];

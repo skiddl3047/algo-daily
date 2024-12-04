@@ -62,7 +62,6 @@ public class MergeSortArray {
         /* handles cases where all elements in nums1 (up to m elements) are greater than all elements in nums2, 
             requiring the remaining elements from nums2 to be filled in the beginning of nums1.
         */
-        System.out.println(Arrays.toString(nums1));
         while (arrayLen2 >= 0) {
             nums1[totalLenOfArray--] = nums2[arrayLen2--];
         }

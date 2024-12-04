@@ -36,7 +36,6 @@ public class TopKFrequentElements {
 
     public static void main(String[] args) {
         System.out.println(Arrays.toString(new TopKFrequentElements().topKFrequentWithStream(new int[]{1,1,1,2,2,3}, 2)));
-
         System.out.println(Arrays.toString(new TopKFrequentElements().topKFrequentWithPriorityQueue(new int[]{1,1,1,2,2,3}, 2)));
     }
 }

@@ -36,30 +36,35 @@ Constraints:
  */
 public class LongestSquareStreakInAnArray {
 
-    public int longestSquareStreak(int[] nums) {
-
-        // Convert array to a set to enable O(1) lookups
-        Set<Integer> numSet = new HashSet<>();
-        for (int num : nums)
-            numSet.add(num);
-
-        int maxStreak = -1;
-        // Iterate over each element and try to form the longest square streak
+    public int longestSquareStreak(int[] nums) { Set<Integer> numSet = new HashSet<>();
         for (int num : nums) {
+            numSet.add(num);
+        }
+        int maxStreak = -1;
+        // Keep track of visited elements to avoid rechecking them
+        Set<Integer> visited = new HashSet<>();
+        for (int num : nums) {
+            if (visited.contains(num)) continue;
             int count = 0;
-            int current = num;
-
-            // Check if we can form a valid square streak starting with `num`
-            while (numSet.contains(current)) {
+            long current = num;
+            // Form streak by squaring numbers
+            while (numSet.contains((int) current)) {
                 count++;
-                current *= current; // Get the square of current number
-                if (count > 1) {
-                    maxStreak = Math.max(maxStreak, count);
-                }
+                visited.add((int) current);  // Mark as visited
+                current = current * current; // Move to the next square
+                if (current > Integer.MAX_VALUE) break; // Prevent overflow
+            }
+
+            if (count > 1) {
+                maxStreak = Math.max(maxStreak, count);
             }
         }
 
         return maxStreak;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(new LongestSquareStreakInAnArray().longestSquareStreak(new int[]{4,3,6,16,8,2}));
     }
 
 }

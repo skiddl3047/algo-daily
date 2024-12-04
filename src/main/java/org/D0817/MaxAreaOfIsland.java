@@ -4,13 +4,21 @@ import java.util.Arrays;
 
 public class MaxAreaOfIsland {
 
+
+    /*
+    Time Complexity: O(R∗C), where R is the number of rows in the given grid,
+    and C is the number of columns. We visit every square once.
+
+    Space complexity: O(R∗C), the space used by seen to keep track of visited squares and
+    the space used by the call stack during our recursion.
+     */
     int rows;
     int columns;
-    public int maxAreaOfIsland(char[][] grid) {
+    public int maxAreaOfIslandWithCharInput(char[][] grid) {
         if (grid == null || grid.length == 0) {
             return 0;
         }
-        //BFS
+        //DFS
         rows=grid.length;
         columns=grid[0].length;
         int maxArea=0;
@@ -34,9 +42,7 @@ public class MaxAreaOfIsland {
         grid[row][col] = '0';
         // Start with area = 1 (current cell)
         int area = 1;
-
         System.out.println(Arrays.deepToString(grid)+" row : "+row+" col : "+col+" maxArea : "+area);
-
         // Check all four directions
         area += dfs(grid, row - 1, col); // up
         area += dfs(grid, row + 1, col); // down
@@ -73,7 +79,7 @@ public class MaxAreaOfIsland {
                 {'0','0','0','0','0','0','0','1','1','0','0','0','0'}
         };
 
-        System.out.println(new MaxAreaOfIsland().maxAreaOfIsland(grid2));
+        System.out.println(new MaxAreaOfIsland().maxAreaOfIslandWithCharInput(grid2));
 
     }
 }

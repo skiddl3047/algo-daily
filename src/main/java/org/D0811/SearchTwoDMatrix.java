@@ -38,12 +38,14 @@ public class SearchTwoDMatrix {
         int pivotIdx, pivotElement;
         while (left <= right) {
             pivotIdx = left + (right-left) / 2;
-            pivotElement = matrix[pivotIdx / n][pivotIdx % n];
+            pivotElement = matrix[pivotIdx / n][pivotIdx % n]; // Logic for finding pivotElement
             if (target == pivotElement)
                 return true;
             else {
-                if (target < pivotElement) right = pivotIdx - 1;
-                else left = pivotIdx + 1;
+                if (target < pivotElement)
+                    right = pivotIdx - 1;
+                else
+                    left = pivotIdx + 1;
             }
         }
         return false;

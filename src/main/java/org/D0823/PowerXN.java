@@ -2,6 +2,15 @@ package org.D0823;
 
 public class PowerXN {
 
+    /*
+    Time complexity: O(logn)
+
+At each iteration, we reduce n by half, thus it means we will make only logn number of iterations using a while loop.
+Thus, it will take overall O(logn) time.
+Space complexity: O(1)
+
+We don't use any additional space.
+     */
     public double myPow(double x, int n) {
         //return Math.pow(x,n);
         if (n == 0) {

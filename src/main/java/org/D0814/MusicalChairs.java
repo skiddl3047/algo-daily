@@ -2,6 +2,8 @@ package org.D0814;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /*
 A group of students are sitting in a circle playing musical-chair.
@@ -21,15 +23,8 @@ Student 1 would be the next winner in this example.
 public class MusicalChairs {
 
     public int findWinner(int n, int k) {
-        List<Integer> students = new ArrayList<>();
-
-        // Initialize the list of students
-        for (int i = 1; i <= n; i++) {
-            students.add(i);
-        }
-
+        List<Integer> students = new ArrayList<>(IntStream.rangeClosed(1, n).boxed().toList());
         int index = 0; // Start from the first student
-
         // Repeat until only one student remains
         while (students.size() > 1) {
             // Determine the index of the next student to remove
@@ -38,9 +33,8 @@ public class MusicalChairs {
             students.remove(index);
             System.out.println(" After removal "+students);
         }
-
         // The last remaining student is the winner
-        return students.get(0);
+        return students.getFirst();
     }
 
     public static void main(String[] args) {

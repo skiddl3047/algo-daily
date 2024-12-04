@@ -65,10 +65,8 @@ A hash map and a result string are created, which results in an additional space
         // Initialize frequencies of letters
         // freq[c] = frequency of char c in s
         int N = s.length();
-        for (int i = 0; i < N; i++) {
-            char letter = s.charAt(i);
-            freq.put(letter, freq.getOrDefault(letter, 0) + 1);
-        }
+        for (int i = 0; i < N; i++)
+            freq.put(s.charAt(i), freq.getOrDefault(s.charAt(i), 0) + 1);
         // Iterate order string to append to result
         int K = order.length();
         StringBuilder result = new StringBuilder();

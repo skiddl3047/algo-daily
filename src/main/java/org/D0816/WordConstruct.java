@@ -6,10 +6,8 @@ import java.util.List;
 public class WordConstruct {
 
     public static boolean canConstruct(String target, List<String> wordBank){
-
         boolean[] dp = new boolean[target.length() + 1];
         dp[0] = true;
-
         for(int i=0; i< target.length(); i++){
             if(dp[i]){
                 for(String word: wordBank){

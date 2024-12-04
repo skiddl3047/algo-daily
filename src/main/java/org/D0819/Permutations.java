@@ -32,6 +32,21 @@ public class Permutations {
         return list;
     }
 
+    /*
+    Given n as the length of nums,
+
+Time complexity, what you should say in an interview: O(n⋅n!)
+Finding permutations is a well-studied problem in combinatorics. Given a set of length n,
+the number of permutations is n! (n factorial). There are n options for the first number, n−1 for the second, and so on.
+For each of the n! permutations, we need O(n) work to copy curr into the answer. This gives us O(n⋅n!) work.
+
+Space complexity: O(n)
+
+We don't count the answer as part of the space complexity.
+The extra space we use here is for curr and the recursion call stack.
+The depth of the call stack is equal to the length of curr, which is limited to n.
+
+     */
     private void backtrack(List<List<Integer>> list, List<Integer> tempList, int [] nums){
         if(tempList.size() == nums.length){
             list.add(new ArrayList<>(tempList));

@@ -9,10 +9,7 @@ A positive integer is considered uniform if all of its digits are equal. For exa
 223 - 223 is not.
 Given two positive integers
 
-A and B determine the number of uniform integers between
-
-
-A and B inclusive.
+A and B determine the number of uniform integers between A and B inclusive.
 Please take care to write a solution which runs within the time limit.
 
 A = 75
@@ -27,11 +24,9 @@ public class UniformInteger {
     public int getUniformIntegerCountInInterval(long A, long B) {
         // Write your code here
         int count = 0;
-
         // Iterate over each possible single digit (1 to 9)
         for (int digit = 1; digit <= 9; digit++) {
             long uniformNumber = digit;
-
             // Generate numbers by repeating the digit
             while (uniformNumber <= B) {
                 // Check if the generated uniform number is within the range [A, B]
