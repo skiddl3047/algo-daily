@@ -32,5 +32,43 @@ public class MergeIntervals {
     public static void main(String[] args) {
         System.out.println(Arrays.deepToString(new MergeIntervals().merge(new int[][]{{1, 3}, {2, 6}, {8, 10}, {15, 18}})));
         System.out.println(Arrays.deepToString(new MergeIntervals().merge(new int[][]{{1, 4}, {4, 5}})));
+
+        System.out.println(Arrays.deepToString(new MergeIntervals().mergeSweepLineAlgorithm(new int[][]{{1, 3}, {2, 6}, {8, 10}, {15, 18}})));
+    }
+
+    public int[][] mergeSweepLineAlgorithm(int[][] intervals) {
+        // Sweepline algorithm
+        int max = 0;
+        for (int[] interval : intervals)
+            max = Math.max(interval[0], max);
+        int[] mp = new int[max + 1];
+
+        for (int[] interval : intervals)
+            mp[interval[0]] = Math.max(interval[1] + 1, mp[interval[0]]); //start = interval[0]; end = interval[1];
+
+        int r = 0;
+        int initialStart = -1;
+        int have = -1;
+        for (int i = 0; i < mp.length; i++) {
+            if (mp[i] != 0) {
+                if (initialStart == -1)
+                    initialStart = i;
+                have = Math.max(mp[i] - 1, have);
+            }
+            if (have == i) {
+                intervals[r++] = new int[] { initialStart, have };
+                initialStart = -1;
+                have = -1;
+            }
+        }
+        if (initialStart != -1) {
+            intervals[r++] = new int[] { initialStart, have };
+        }
+        if (intervals.length == r) {
+            return intervals;
+        }
+        int[][] res = new int[r][];
+        System.arraycopy(intervals, 0, res, 0, r);
+        return res;
     }
 }

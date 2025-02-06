@@ -2,12 +2,16 @@ package org.D0902;
 
 public class ContainerWithMostWater {
 
-    public int maxArea(int[] height) {
+    /*
+    Complexity Analysis
 
+    Time complexity: O(n). Single pass.
+    Space complexity: O(1). Constant space is used.
+     */
+    public int maxArea(int[] height) {
         int left = 0;
         int right = height.length - 1;
         int maxArea = 0;
-
         while (left < right) {
             System.out.println("left : "+left + " right : "+right + " height[left] : "+height[left]+" height[right] : "+height[right]);
             int area = Math.min(height[left], height[right]) * (right - left);
@@ -18,7 +22,6 @@ public class ContainerWithMostWater {
             else
                 right--;
         }
-
         return maxArea;
     }
 

@@ -44,7 +44,7 @@ nums2.length == n
 
 Follow up: Can you come up with an algorithm that runs in O(m + n) time?
  */
-public class MergeSortArray {
+public class MergeTwoSortedArrays {
 
     public void merge(int[] nums1, int m, int[] nums2, int n) {
         int arrayLen1 = m - 1;
@@ -69,14 +69,14 @@ public class MergeSortArray {
 
     public static void main(String[] args) {
         int[] array1 = new int[]{1,2,3,0,0,0};
-        new MergeSortArray().merge(array1, 3, new int[]{2,5,6}, 3);
+        new MergeTwoSortedArrays().merge(array1, 3, new int[]{2,5,6}, 3);
         System.out.println(Arrays.toString(array1));
         array1 = new int[]{4,5,6,0,0,0};
-        new MergeSortArray().merge(array1, 3, new int[]{1,2,3}, 3);
+        new MergeTwoSortedArrays().merge(array1, 3, new int[]{1,2,3}, 3);
         System.out.println(Arrays.toString(array1));
 
         array1 = new int[]{1,2,3,0,0,0,0};
-        new MergeSortArray().merge(array1, 3, new int[]{2,4,5,6}, 4);
+        new MergeTwoSortedArrays().merge(array1, 3, new int[]{2,4,5,6}, 4);
         System.out.println(Arrays.toString(array1));
     }
 }

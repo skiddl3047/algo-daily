@@ -6,9 +6,11 @@ public class RottingOranges {
 
     public static void main(String[] args) {
         System.out.println(new RottingOranges().orangesRotting(new int[][] {{2,1,1},{1,1,0},{0,1,1}}));
+        System.out.println(new RottingOranges().orangesRotting(new int[][] {{2,1,1},{0,1,1},{1,0,1}}));
+        System.out.println(new RottingOranges().orangesRotting(new int[][] {{0,2}}));
     }
     public int dfs(int[][] grid, int row, int column, int currentDistanceToRotten) {
-        System.out.println("row : "+row+" column : "+column+" currentDistanceToRotten : "+currentDistanceToRotten);
+        //System.out.println("row : "+row+" column : "+column+" currentDistanceToRotten : "+currentDistanceToRotten);
         int n = grid.length;
         int m = grid[0].length;
         if (row < 0 || column < 0 || row >= n || column >= m) {
@@ -24,7 +26,7 @@ public class RottingOranges {
                 return currentDistanceToRotten;
             } else {
                 grid[row][column] = currentDistanceToRotten;
-                System.out.println("grid["+row+"]["+column+"] = "+grid[row][column]);
+                //System.out.println("grid["+row+"]["+column+"] = "+grid[row][column]);
             }
         }
 
@@ -36,10 +38,6 @@ public class RottingOranges {
     }
 
     public int orangesRotting(int[][] grid) {
-
-        for (int[] ints : grid) {
-            System.out.println(Arrays.toString(ints));
-        }
         if (grid == null || grid.length == 0) return 0;
 
         int rowLength = grid.length;
@@ -64,18 +62,13 @@ public class RottingOranges {
         }
         int min = 0;
         for (int[] rowArray : grid) {
-            System.out.println(Arrays.toString(rowArray));
-            //for (int column = 0; column < columnLength; column++) {
             for (int val : rowArray) {
-                    //int val = rowArray[column];
-                    if (val == 1) {
+                    if (val == 1)
                         return -1;
-                    } else if (val < 0 && val < min) {
+                    else if (val < 0 && val < min)
                         min = val;
-                    }
                 }
             }
-        //}
         return Math.abs(min);
     }
 }

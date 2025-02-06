@@ -9,7 +9,7 @@ public class KthMissingPositiveInteger {
             System.out.println("left : "+left+" right : "+right+" pivot : "+pivot+" arr[pivot] : "+arr[pivot]);
             // If number of positive integers which are missing before arr[pivot] is less than k -->
             // continue to search on the right.
-            if (arr[pivot] - pivot - 1 < k) {
+            if (arr[pivot] - pivot - 1 < k) { // (arr[pivot] - pivot - 1) missing positive numbers before the index
                 left = pivot + 1;
                 // Otherwise, go left.
             } else {
