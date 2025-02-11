@@ -32,9 +32,16 @@ public class TopKFrequentElements {
     Removal (poll): 𝑂(logk).
     Total for 𝑛 n elements: 𝑂 (n logk).
      */
+    /*
+    Overall Time Complexity Combining all steps: O(N) for adding elements to map
+                                                 + O(N log K) for adding elements to queue
+                                                 + O(K log K) for polling elements from queue
+                          Final Time Complexity: O(N log K).
+    Overall Space Complexity : O(N) (for the frequency map) + O(K) (for the heap) + O(K) (for the result array).
+      Final Space Complexity : O(N + K).
+     */
     public int[] topKFrequentWithPriorityQueueMinHeap(int[] nums, int k) {
         Map<Integer, Integer> frequencyMap = new HashMap<>();
-        int n = nums.length;
         for(int num: nums)
             frequencyMap.put(num, frequencyMap.getOrDefault(num, 0)+1);
 
@@ -48,8 +55,35 @@ public class TopKFrequentElements {
         for(int i=0;i< k;i++){
             ans[i] = minHeap.poll().getKey();
         }
+        /* for descending order
+        for(int i= k-1;i >=0 ;i--){
+            ans[i] = minHeap.poll().getKey();
+        } */
         return ans;
     }
+
+    public int[] bottomKFrequentWithPriorityQueueMaxHeap(int[] nums, int k) {
+        Map<Integer, Integer> frequencyMap = new HashMap<>();
+        for(int num: nums)
+            frequencyMap.put(num, frequencyMap.getOrDefault(num, 0)+1);
+
+        PriorityQueue<Map.Entry<Integer, Integer>> maxHeap = new PriorityQueue<>((a,b) -> b.getValue() - a.getValue()); //Min-Heap
+        for (Map.Entry<Integer, Integer> entry : frequencyMap.entrySet()){
+            maxHeap.add(entry);
+            if (maxHeap.size() > k)
+                maxHeap.poll(); // Remove the most frequent element
+        }
+        int[] ans = new int[k];
+        for(int i=0;i< k;i++){
+            ans[i] = maxHeap.poll().getKey();
+        }
+        /* for reverse order
+        for(int i= k-1;i >=0 ;i--){
+            ans[i] = minHeap.poll().getKey();
+        } */
+        return ans;
+    }
+
     /*
 
     Approach 1 (Max-Heap): Time Complexity: Building the frequencyMap: O(n).
@@ -141,6 +175,7 @@ public class TopKFrequentElements {
     public static void main(String[] args) {
         System.out.println(Arrays.toString(new TopKFrequentElements().topKFrequentWithStream(new int[]{1,1,1,2,2,3}, 2)));
         System.out.println(Arrays.toString(new TopKFrequentElements().topKFrequentWithPriorityQueueMinHeap(new int[]{10,10,10,20,20,30}, 2)));
+        System.out.println(Arrays.toString(new TopKFrequentElements().bottomKFrequentWithPriorityQueueMaxHeap(new int[]{10,20,20,30}, 2)));
         System.out.println(Arrays.toString(new TopKFrequentElements().topKFrequentWithPriorityQueueMaxHeap(new int[]{10,10,10,20,20,30}, 2)));
     }
 
