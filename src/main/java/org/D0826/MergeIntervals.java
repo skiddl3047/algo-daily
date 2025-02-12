@@ -29,6 +29,10 @@ public class MergeIntervals {
         //Avoids Waste: No extra memory is allocated since the array is resized automatically.
     }
 
+   /* Final Complexity Analysis:
+    Time Complexity: O(n log n) (due to sorting)
+    Space Complexity: O(n) (for storing merged intervals)
+    */
     public int[][] mergeIntervals(int[][] intervals) {
         Arrays.sort(intervals, Comparator.comparingInt(a -> a[0]));
         List<int[]> merged = new ArrayList<>();
