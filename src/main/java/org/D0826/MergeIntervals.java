@@ -29,6 +29,20 @@ public class MergeIntervals {
         //Avoids Waste: No extra memory is allocated since the array is resized automatically.
     }
 
+    public int[][] mergeIntervals(int[][] intervals) {
+        Arrays.sort(intervals, Comparator.comparingInt(a -> a[0]));
+        List<int[]> merged = new ArrayList<>();
+        merged.add(intervals[0]);
+        for (int i= 1; i < intervals.length; i++) {
+            if(merged.getLast()[1] >= intervals[i][0]){
+                merged.getLast()[1] = Math.max(merged.getLast()[1], intervals[i][1]);
+            }else{
+                merged.add(intervals[i]);
+            }
+        }
+        return merged.toArray(new int[0][]);
+    }
+
     public static void main(String[] args) {
         // test for pan
         int[][] testArray = new int[][]{{1, 3}, {2, 6}, {8, 10}, {15, 18}};
@@ -37,7 +51,7 @@ public class MergeIntervals {
                 System.out.println(" i : "+i+" j : "+j+" testArray["+i+"]["+j+"] : "+testArray[i][j]);
 
         System.out.println(Arrays.deepToString(new MergeIntervals().merge(new int[][]{{1, 3}, {2, 6}, {8, 10}, {15, 18}})));
-        System.out.println(Arrays.deepToString(new MergeIntervals().merge(new int[][]{{1, 4}, {4, 5}})));
+        System.out.println(Arrays.deepToString(new MergeIntervals().mergeIntervals(new int[][]{{1, 4}, {4, 5}})));
 
         System.out.println(Arrays.deepToString(new MergeIntervals().mergeSweepLineAlgorithm(new int[][]{{1, 3}, {2, 6}, {8, 10}, {15, 18}})));
     }
