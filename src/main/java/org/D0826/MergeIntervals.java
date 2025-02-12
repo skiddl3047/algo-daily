@@ -30,6 +30,12 @@ public class MergeIntervals {
     }
 
     public static void main(String[] args) {
+        // test for pan
+        int[][] testArray = new int[][]{{1, 3}, {2, 6}, {8, 10}, {15, 18}};
+        for(int i=0; i < testArray.length; i++)
+            for(int j=0; j< testArray[i].length; j++)
+                System.out.println(" i : "+i+" j : "+j+" testArray["+i+"]["+j+"] : "+testArray[i][j]);
+
         System.out.println(Arrays.deepToString(new MergeIntervals().merge(new int[][]{{1, 3}, {2, 6}, {8, 10}, {15, 18}})));
         System.out.println(Arrays.deepToString(new MergeIntervals().merge(new int[][]{{1, 4}, {4, 5}})));
 
