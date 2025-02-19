@@ -50,7 +50,7 @@ public class UniquePaths {
     }
 /*
 
-In a particular path, there will be (n-1) D and (n-1) R.
+In a particular path, there will be (m-1) D and (n-1) R.
 For eg: in a 3x3 matrix - path can be DRDR, DDRR etc. (D = down, R = right)
 
 Thus totalSteps = (m-1) + (n-1).
