@@ -72,7 +72,34 @@ Total: 𝑂(𝑉 + 𝐸)
         return false;
     }
 
+    public boolean canFinishLeetcodeOptimal(int numCourses, int[][] prerequisites) {
+        int[] inDegrees = new int[numCourses];
+        List<List<Integer>> nextCourses = new ArrayList<>();
+        for (int i = 0; i < numCourses; i++)
+            nextCourses.add(new ArrayList<>());
+        for (int[] prerequisite: prerequisites){
+            inDegrees[prerequisite[0]]++;
+            nextCourses.get(prerequisite[1]).add(prerequisite[0]);
+        }
+        Queue<Integer> queue = new LinkedList<>();
+        for (int i = 0; i < numCourses;i++)
+            if (inDegrees[i] == 0)
+                queue.add(i);
+        int count = 0;
+        while(!queue.isEmpty()){
+            int course = queue.poll();
+            count++;
+            for (int nextCourse : nextCourses.get(course)){
+                inDegrees[nextCourse]--;
+                if (inDegrees[nextCourse] == 0)
+                    queue.add(nextCourse);
+            }
+        }
+        return count == numCourses;
+    }
+
     public static void main(String[] args) {
+        System.out.println(new CourseSchedule().canFinishLeetcodeOptimal(2,new int[][] { {1,0} }));
         //https://leetcode.com/problems/course-schedule/description/comments/1968461
         System.out.println(new CourseSchedule().canFinish(5,new int[][] { {1,2},{2,3},{3,4} }));
         System.out.println(new CourseSchedule().canFinish(4,new int[][] { {0,1},{1,2},{2,0},{3,2} }));

@@ -23,8 +23,7 @@ public class HandOfStraights {
             // Process the sequence starting from startCard
             while (startCard <= card) {
                 while (cardCount.getOrDefault(startCard, 0) > 0) {
-                    // Check if we can form a consecutive sequence
-                    // of groupSize cards
+                    // Check if we can form a consecutive sequence of groupSize cards
                     for (int nextCard = startCard; nextCard < startCard + groupSize; nextCard++) {
                         if (cardCount.getOrDefault(nextCard, 0) == 0) {
                             return false;

@@ -14,9 +14,9 @@ public class CombinationSum4 {
             return 1;
         }
         int res = 0;
-        for (int i = 0; i < nums.length; i++) {
-            if (target >= nums[i]) {
-                res += combinationSum4(nums, target - nums[i]);
+        for (int num : nums) {
+            if (target >= num) {
+                res += combinationSum4(nums, target - num);
             }
         }
         return res;
@@ -36,9 +36,9 @@ public class CombinationSum4 {
             return dp[target];
         }
         int res = 0;
-        for (int i = 0; i < nums.length; i++) {
-            if (target >= nums[i]) {
-                res += helper(nums, target - nums[i]);
+        for (int num : nums) {
+            if (target >= num) {
+                res += helper(nums, target - num);
             }
         }
         dp[target] = res;
@@ -46,21 +46,22 @@ public class CombinationSum4 {
     }
 
     public int combinationSum4DPBottomUP(int[] nums, int target) {
-        int[] comb = new int[target + 1];
-        comb[0] = 1;
-        for (int i = 1; i < comb.length; i++) {
-            for (int j = 0; j < nums.length; j++) {
-                if (i - nums[j] >= 0) {
-                    comb[i] += comb[i - nums[j]];
+        int[] dp = new int[target + 1];
+        dp[0] = 1;
+        for (int pos = 1; pos < dp.length; pos++) {
+            for (int num : nums) {
+                if (pos - num >= 0) {
+                    dp[pos] += dp[pos - num];
                 }
             }
         }
-        return comb[target];
+        return dp[target];
     }
 
     public static void main(String[] args) {
         System.out.println(new CombinationSum4().combinationSum4(new int[]{1,2,3}, 4));
         System.out.println(new CombinationSum4().combinationSum4DPTopDown(new int[]{1,2,3}, 4));
         System.out.println(new CombinationSum4().combinationSum4DPBottomUP(new int[]{1,2,3}, 4));
+        System.out.println(new CombinationSum4().combinationSum4DPBottomUP(new int[]{1,3,4}, 4));
     }
 }
