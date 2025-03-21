@@ -11,4 +11,13 @@ public class ListNode {
         this.val = val;
         this.next = next;
     }
+
+    // Helper method to print ListNode
+    public static void printList(ListNode node) {
+        while (node != null) {
+            System.out.print(node.val + " -> ");
+            node = node.next;
+        }
+        System.out.println("null");
+    }
 }

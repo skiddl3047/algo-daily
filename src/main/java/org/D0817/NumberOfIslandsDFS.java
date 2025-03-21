@@ -9,13 +9,30 @@ package org.D0817;
 // matrix for directions - might increase the complexity v badly just
 // do it like its done here in this solution (its pretty fast)
 
-// Avoid using a queue (can be solved with it too) while the recursive approach is simpler and often faster, it could run into issues with deep recursion if the grid is very large. Using a queue might be safer in such cases.
+// Avoid using a queue (can be solved with it too) while the recursive approach is simpler and often faster,
+// it could run into issues with deep recursion if the grid is very large. Using a queue might be safer in such cases.
 
 // its like encountring a 1 and incrementing the island count
 // then you set its neighbours 0 via bfs
 
-// We do it because every connected piece of land ("1") will be counted as 1 island only, so on encountering ("1") , would just increment the count and then submerge the whole piece of land and move on as other 1s won't affect the count.
+// We do it because every connected piece of land ("1") will be counted as 1 island only, so on encountering ("1") ,
+// would just increment the count and then submerge the whole piece of land and move on as other 1s won't affect the count.
 
+/*
+Time Complexity
+The time complexity of the code is O(m * n), where m is the number of rows in the grid, and n is the number of columns.
+This is because the algorithm must visit each cell in the entire grid once to ensure all parts of the islands are counted and marked.
+The DFS search is invoked for each land cell ('1') that hasn't yet been visited, and it traverses all its adjacent land cells.
+Although the outer loop runs for m * n iterations, each cell is visited once by the DFS,
+ensuring that the overall time complexity remains linear concerning the total number of cells.
+
+Space Complexity
+The space complexity is O(m * n) in the worst case.
+This worst-case scenario occurs when the grid is filled with land cells ('1'),
+where the depth of the recursion stack (DFS) potentially equals the total number of cells in the grid if we are dealing with one large island.
+Since the DFS can go as deep as the largest island, and in this case, that's the entire grid,
+the stack space used by the recursion is proportionate to the total number of cells.
+ */
 import java.util.Arrays;
 
 public class NumberOfIslandsDFS {
