@@ -36,7 +36,7 @@ Space Complexity : O(N). This space is occupied by the visited dictionary and in
         // as key and value respectively. This helps to avoid cycles.
         HashMap<Node, Node> visited = new HashMap<>();
         // Put the first node in the queue
-        LinkedList<Node> queue = new LinkedList<Node>();
+        LinkedList<Node> queue = new LinkedList<>();
         queue.add(node);
         // Clone the node and put it in the visited dictionary.
         visited.put(node, new Node(node.val, new ArrayList<>()));
