@@ -4,7 +4,12 @@ import java.util.HashMap;
 
 public class MostFrequentSubstring {
 
+    /*
+    Time Complexity: O(n): The sliding window ensures that each character is processed only once,
+            and substring construction is done in constant time.
 
+    Space Complexity: O(n): The HashMap still stores up to O(n - k + 1) substrings in the worst case.
+     */
     public static String findMostFrequentSubstring(String s, int k) {
         if (s == null || s.length() < k || k <= 0) {
             return ""; // Return empty string if input is invalid
@@ -30,15 +35,24 @@ public class MostFrequentSubstring {
             substringCount.put(currentSubstring, substringCount.getOrDefault(currentSubstring, 0) + 1);
 
             // Update the result if this substring has a higher count
-            if (substringCount.get(currentSubstring) > maxCount) {
+            if (substringCount.get(currentSubstring) >= maxCount) {
                 maxCount = substringCount.get(currentSubstring);
                 result = currentSubstring;
             }
         }
-
+        System.out.println(substringCount);
         return result;
     }
 
+    public static void main(String[] args) {
+        String s = "aabbaaa";
+        int k = 2;
+        System.out.println("Most frequent substring of length " + k + ": " + findMostFrequentSubstring(s, k));
+        k=4;
+        System.out.println("Most frequent substring of length " + k + ": " + findMostFrequentSubstring("abcdabcde", k));
+        k=5;
+        System.out.println("Most frequent substring of length " + k + ": " + findMostFrequentSubstring("abcdabcde", k));
+    }
 
     public static String findMostFrequentSubstringRollingHash(String s, int k) {
         if (s == null || s.length() < k || k <= 0) {
@@ -78,13 +92,6 @@ public class MostFrequentSubstring {
                 result = s.substring(i - k + 1, i + 1);
             }
         }
-
         return result;
-    }
-
-    public static void main(String[] args) {
-        String s = "aabbaaa";
-        int k = 2;
-        System.out.println("Most frequent substring of length " + k + ": " + findMostFrequentSubstring(s, k));
     }
 }
