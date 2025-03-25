@@ -5,23 +5,72 @@ import java.util.Map;
 
 public class MaximumNumberOfOccurrencesOfASubstring {
 
+    /*
+        Understanding the Algorithm
+We use a sliding window approach to find substrings of length minSize.
+
+The ch array (size 26) tracks character frequencies in the current window.
+
+A HashMap<String, Integer> keeps frequency counts of valid substrings.
+
+The loop expands and shrinks the window while ensuring:
+
+The substring has at most maxLetters unique characters.
+
+The substring length does not exceed minSize.
+
+If a valid substring is found, we update the frequency in map and track the max frequency.
+
+Time Complexity Analysis :
+
+Sliding Window Processing
+We iterate through s once (right moves from 0 to s.length()), meaning the outer while loop runs O(N) times.
+The inner while loop (shrinking left) runs at most O(N) times overall since each character is processed once.
+Extracting substrings using s.substring(left, right) takes O(minSize) time in each valid case.
+
+HashMap Operations
+Each valid substring (length = minSize) is stored in map and updated.
+
+Worst case: all substrings of length minSize are unique, leading to O(N) insertions.
+
+Overall Complexity
+Sliding window traversal: O(N)
+Substring extraction: O(minSize) per valid substring, at most O(N) substrings → O(N * minSize)
+HashMap insertions & lookups: O(N)
+
+Total worst-case time complexity: O(N x minSize)
+Since minSize is small (compared to N), it can be treated as a constant, making the complexity O(N) in practical cases.
+
+Space Complexity Analysis
+Space Usage
+Character frequency array (ch[26]) → O(1) (constant space).
+
+HashMap (map) storage:
+
+In the worst case, each substring of length minSize is unique.
+
+This results in storing O(N) substrings, each of length minSize, leading to O(N * minSize) space.
+
+Total Space Complexity: O(N⋅minSize)
+Again, if minSize is small, this is approximately O(N).
+     */
     //Tracking all possible sizes introduces unnecessary complexity since substrings of smaller sizes inherently "cover" their larger extensions.
     public int maxFreq(String s, int maxLetters, int minSize, int maxSize) {
         HashMap<String,Integer> map=new HashMap<>();
         int res=0;
-        int[] ch=new int[128];
+        int[] ch=new int[26];
         int left=0, right=0, letters=0;
         while(right < s.length()) {
-            if (ch[s.charAt(right)] == 0) {
+            if (ch[s.charAt(right) -97] == 0) {
                 letters++;
             }
-            ch[s.charAt(right)]++;
+            ch[s.charAt(right) - 97]++;
             right++;
             while(letters > maxLetters || (right-left) > minSize){
-                if(ch[s.charAt(left)] == 1) {
+                if(ch[s.charAt(left) -97 ] == 1) {
                     letters--;
                 }
-                ch[s.charAt(left)]--;
+                ch[s.charAt(left) - 97]--;
                 left++;
             }
             if((right-left)==minSize){

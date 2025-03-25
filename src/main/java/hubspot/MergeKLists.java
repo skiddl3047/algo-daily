@@ -109,6 +109,60 @@ public class MergeKLists {
         printList(mergeKListsNode);
 
     }
+    /*
+    Time Complexity Analysis
+The function uses a bottom-up merge sort approach but stops merging once we collect m elements.
+
+Step 1: Merging pairs of lists (merge2Lists)
+We merge k lists in a pairwise fashion.
+
+In each merge step, interval doubles (1 → 2 → 4 → ...).
+
+This results in log k levels of merging.
+
+Step 2: Processing only m elements
+The key difference from the standard merge algorithm is that we only process the first m elements.
+
+Normally, merging two lists of length N takes O(N) time.
+
+However, since we stop merging after m elements, each merge2Lists call only processes at most m elements.
+
+Total Time Complexity
+Each level of merging runs O(m), and there are log k levels.
+
+Total complexity: O(m log k)
+In the worst case where m = N (the total number of elements in all lists), it falls back to: O(N log k)
+which is the standard merge complexity.
+
+Space Complexity Analysis
+Heap/Extra Storage
+The algorithm uses only a few extra pointers (no additional data structures like heaps or arrays).
+
+The only extra space is for the dummy head node and tracking pointers.
+
+Linked List Storage
+The output list consists of exactly m nodes.
+
+Since the nodes are from the original lists (linked by references), no extra space is used.
+
+Total Space Complexity O(1)
+(excluding the output list, which is necessary for the result).
+
+Final Complexity Summary
+Complexity	Worst Case
+Time Complexity	O(m log k)
+Space Complexity	O(1) (excluding the output list)
+
+Key Observations
+Efficient Early Stopping: Unlike a full merge that processes all nodes, this approach stops once we reach m elements, improving efficiency.
+
+No Additional Space: The algorithm does not use extra memory (like heaps), making it space-efficient.
+
+Scalability: If m is much smaller than the total number of elements (N), this method avoids unnecessary processing.
+Conclusion: This is an optimized approach when we only need m elements instead of fully merging all k lists!
+
+*/
+
 
     public static ListNode mergeKLists(ListNode[] lists, int m) {
         int amount = lists.length;
@@ -152,10 +206,8 @@ public class MergeKLists {
             point = point.next;
             count++;
         }
-
         // Cut off any remaining elements beyond m
         point.next = null;
-
         return head.next;
     }
 }
