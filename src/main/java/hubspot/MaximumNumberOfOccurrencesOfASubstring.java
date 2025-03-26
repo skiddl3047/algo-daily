@@ -54,33 +54,34 @@ This results in storing O(N) substrings, each of length minSize, leading to O(N 
 Total Space Complexity: O(N⋅minSize)
 Again, if minSize is small, this is approximately O(N).
      */
-    //Tracking all possible sizes introduces unnecessary complexity since substrings of smaller sizes inherently "cover" their larger extensions.
+    //Tracking all possible sizes introduces unnecessary complexity since
+    // substrings of smaller sizes inherently "cover" their larger extensions.
     public int maxFreq(String s, int maxLetters, int minSize, int maxSize) {
         HashMap<String,Integer> map=new HashMap<>();
-        int res=0;
-        int[] ch=new int[26];
-        int left=0, right=0, letters=0;
+        int result=0;
+        int[] charCount=new int[26];
+        int left=0, right=0, currLettersCount =0;
         while(right < s.length()) {
-            if (ch[s.charAt(right) -97] == 0) {
-                letters++;
+            if (charCount [s.charAt(right++) -97]++ == 0) { // first if condition check
+                currLettersCount ++;
             }
-            ch[s.charAt(right) - 97]++;
-            right++;
-            while(letters > maxLetters || (right-left) > minSize){
-                if(ch[s.charAt(left) -97 ] == 1) {
-                    letters--;
+//            charCount [s.charAt(right) - 97]++;
+//            right++;
+            while(currLettersCount  > maxLetters || (right-left) > minSize){
+                if(charCount [s.charAt(left++) -97 ]-- == 1) {
+                    currLettersCount --;
                 }
-                ch[s.charAt(left) - 97]--;
-                left++;
+//                charCount [s.charAt(left) - 97]--;
+//                left++;
             }
             if((right-left)==minSize){
                 String sb=s.substring(left, right);
                 map.put(sb, map.getOrDefault(sb,0) + 1);
-                res=Math.max(res, map.get(sb));
+                result=Math.max(result, map.get(sb));
             }
         }
         System.out.println(map);
-        return res;
+        return result;
     }
 
     //https://leetcode.com/problems/maximum-number-of-occurrences-of-a-substring/solutions/6105020/intuition-optimized-sliding-window
@@ -116,6 +117,8 @@ Again, if minSize is small, this is approximately O(N).
     }
 
     public static void main(String[] args) {
+        System.out.println(new MaximumNumberOfOccurrencesOfASubstring().maxFreq("aababcaab",2,3,4));
+        System.out.println(new MaximumNumberOfOccurrencesOfASubstring().maxFreq("abc",1,1,2));
         System.out.println(new MaximumNumberOfOccurrencesOfASubstring().maxFrequency("abcdabcde",4,3,4));
         System.out.println(new MaximumNumberOfOccurrencesOfASubstring().maxFreq("abcdabcde",4,3,4));
         System.out.println(new MaximumNumberOfOccurrencesOfASubstring().maxFrequency("aaaabbbb",3,3,4));

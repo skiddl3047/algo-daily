@@ -14,17 +14,14 @@ public class MostFrequentSubstring {
         if (s == null || s.length() < k || k <= 0) {
             return ""; // Return empty string if input is invalid
         }
-
         HashMap<String, Integer> substringCount = new HashMap<>();
         int maxCount = 0;
         String result = "";
-
         // Initialize the first substring of length k
         StringBuilder window = new StringBuilder(s.substring(0, k));
         substringCount.put(window.toString(), 1);
         maxCount = 1;
         result = window.toString();
-
         // Slide the window across the string
         for (int i = k; i < s.length(); i++) {
             // Remove the first character and add the next character
