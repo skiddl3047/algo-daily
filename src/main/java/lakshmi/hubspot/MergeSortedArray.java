@@ -20,8 +20,14 @@ public class MergeSortedArray {
     }
 
     private static int[] mergeSortedArray(int[] array1, int[] array2, int limit) {
+        if (limit <= 0) {
+            return new int[0]; // Return empty array if limit is zero or negative
+        }
         int array1Length = Objects.nonNull(array1) ? array1.length : 0;
         int array2Length = Objects.nonNull(array2) ? array2.length : 0;
+        if (array1Length == 0 && array2Length == 0) {
+            return new int[0]; // If both arrays are empty, return an empty array
+        }
         int resultArrayLength = Math.min(limit, array1Length + array2Length);
         int[] resultArray =  new int[resultArrayLength];
         int array1Idx = 0, array2Idx = 0, currentLimit =0;
