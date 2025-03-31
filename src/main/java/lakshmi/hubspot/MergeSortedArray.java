@@ -20,20 +20,20 @@ public class MergeSortedArray {
     private static int[] mergeSortedArray(int[] array1, int[] array2, int limit) {
         int resultArrayLength = Math.min(limit, array1.length + array2.length);
         int[] resultArray =  new int[resultArrayLength];
-        int i = 0, j = 0, k =0;
-        while (i < array1.length && j < array2.length && k< limit) {
-          if(array1[i] < array2[j]) {
-              resultArray[k++] = array1[i++];
+        int array1Idx = 0, array2Idx = 0, currentLimit =0;
+        while (array1Idx < array1.length && array2Idx < array2.length && currentLimit< limit) {
+          if(array1[array1Idx] < array2[array2Idx]) {
+              resultArray[currentLimit++] = array1[array1Idx++];
           } else {
-              resultArray[k++] = array2[j++];
+              resultArray[currentLimit++] = array2[array2Idx++];
           }
         }
-        while (i < array1.length && k< limit) {
-          resultArray[k++] = array1[i++];
-      }
-      while ( j < array2.length && k< limit)  {
-          resultArray[k++] = array2[j++];
-      }
+        while (array1Idx < array1.length && currentLimit< limit) {
+          resultArray[currentLimit++] = array1[array1Idx++];
+        }
+        while ( array2Idx < array2.length && currentLimit< limit)  {
+              resultArray[currentLimit++] = array2[array2Idx++];
+        }
       return resultArray;
     }
 }
