@@ -30,6 +30,19 @@ public class MedianOfDataStream {
         medianOfDataStream.addNum(9);
         median = medianOfDataStream.findMedian();
         System.out.println(median);
+
+        System.out.println("---------------------------");
+        MedianOfDataStream medianOfDataStream1 = new MedianOfDataStream();
+        medianOfDataStream1.addNumWithMinHeap(11);
+        medianOfDataStream1.addNumWithMinHeap(12);
+        median = medianOfDataStream1.findMedianWithMinHeap();
+        System.out.println(median);
+        medianOfDataStream1.addNumWithMinHeap(13);
+        median = medianOfDataStream1.findMedianWithMinHeap();
+        System.out.println(median);
+        medianOfDataStream1.addNumWithMinHeap(9);
+        median = medianOfDataStream1.findMedianWithMinHeap();
+        System.out.println(median);
     }
 
     PriorityQueue<Integer> minQueue;
@@ -56,6 +69,25 @@ public class MedianOfDataStream {
 
     private double findMedian() {
         return maxQueue.size() > minQueue.size() ? maxQueue.peek() :
+                (double) (maxQueue.peek() + minQueue.peek()) * 0.5;
+    }
+
+    private void addNumWithMinHeap(int n) {
+        if(minQueue.isEmpty() || n >= minQueue.peek()) {
+            minQueue.offer(n);
+        } else {
+            maxQueue.offer(n);
+        }
+
+        if (minQueue.size() > maxQueue.size() + 1) {
+            maxQueue.offer(minQueue.poll());
+        } else if (maxQueue.size() > minQueue.size()) {
+            minQueue.offer(maxQueue.poll());
+        }
+    }
+
+    private double findMedianWithMinHeap() {
+        return minQueue.size() > maxQueue.size() ? minQueue.peek() :
                 (double) (maxQueue.peek() + minQueue.peek()) * 0.5;
     }
 }
