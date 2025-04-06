@@ -20,20 +20,20 @@ public class MergeSortedLists {
         }
         int actualResultSize = Math.min(limit, list1Size + list2Size);
         List<Integer> mergedList = new ArrayList<>(actualResultSize);
-        int i = 0, j = 0;
-        while (i < list1Size && j < list2Size && mergedList.size() < limit) {
-            if (list1.get(i) < list2.get(j)) {
-                mergedList.add(list1.get(i++));
+        int list1Indx = 0, list2Indx = 0;
+        while (list1Indx < list1Size && list2Indx < list2Size && mergedList.size() < limit) {
+            if (list1.get(list1Indx) < list2.get(list2Indx)) {
+                mergedList.add(list1.get(list1Indx++));
             } else {
-                mergedList.add(list2.get(j++));
+                mergedList.add(list2.get(list2Indx++));
             }
 
         }
-        while (i < list1Size && mergedList.size() < limit) {
-            mergedList.add(list1.get(i++));
+        while (list1Indx < list1Size && mergedList.size() < limit) {
+            mergedList.add(list1.get(list1Indx++));
         }
-        while (j < list2Size && mergedList.size() < limit) {
-            mergedList.add(list2.get(j++));
+        while (list2Indx < list2Size && mergedList.size() < limit) {
+            mergedList.add(list2.get(list2Indx++));
         }
         return mergedList;
     }

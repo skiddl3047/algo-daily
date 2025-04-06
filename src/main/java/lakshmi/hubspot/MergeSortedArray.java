@@ -1,9 +1,9 @@
 package lakshmi.hubspot;
 
+import java.util.Objects;
+
 //The time complexity of the given algorithm is O(limit) because the while loop
 // runs at most limit times, selecting elements from array1 and array2 in sorted order.
-
-import java.util.Objects;
 
 //The space complexity is O(limit) because the algorithm creates a new array of size
 // limit to store the merged elements.
