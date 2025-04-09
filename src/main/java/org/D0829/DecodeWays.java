@@ -58,14 +58,14 @@ public class DecodeWays {
     /*
     Complexity Analysis
 Time Complexity: O(N), where N is length of the string.
-We're essentially doing the same work as what we were in Approach 2, except this time we're throwing away calculation results when we no longer need them.
+We're essentially doing the same work as what we were in Approach 2, except this time
+we're throwing away calculation results when we no longer need them.
 Space Complexity: O(1). Instead of a dp array, we're simply using two variables.
      */
     public int numDecodings(String s) {
         if (s.charAt(0) == '0') {
             return 0;
         }
-
         int n = s.length();
         int twoBack = 1;
         int oneBack = 1;

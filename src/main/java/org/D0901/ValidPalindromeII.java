@@ -24,16 +24,6 @@ Constraints:
 s consists of lowercase English letters.
  */
 public class ValidPalindromeII {
-    private boolean checkPalindrome(String s, int i, int j) {
-        while (i < j) {
-            if (s.charAt(i) != s.charAt(j)) {
-                return false;
-            }
-            i++;
-            j--;
-        }
-        return true;
-    }
 
     /*
 Complexity Analysis
@@ -49,7 +39,19 @@ As such, we have a time complexity of O(N).
 
 Space complexity: O(1).
 The only extra space used is by the two pointers i and j, which can be considered constant relative to the input size.
- */
+*/
+
+    private boolean checkPalindrome(String s, int i, int j) {
+        while (i < j) {
+            if (s.charAt(i) != s.charAt(j)) {
+                return false;
+            }
+            i++;
+            j--;
+        }
+        return true;
+    }
+
     public boolean validPalindrome(String s) {
         int left = 0;
         int right = s.length() - 1;
@@ -63,7 +65,6 @@ The only extra space used is by the two pointers i and j, which can be considere
         }
         return true;
     }
-
 
     public static void main(String[] args) {
         System.out.println(new ValidPalindromeII().validPalindrome("aba"));

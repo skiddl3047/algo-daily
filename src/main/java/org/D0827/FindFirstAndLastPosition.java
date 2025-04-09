@@ -1,5 +1,7 @@
 package org.D0827;
 
+import java.util.Arrays;
+
 public class FindFirstAndLastPosition {
 
 /*
@@ -9,18 +11,20 @@ public class FindFirstAndLastPosition {
     We simply perform binary search twice in this case.
     Space Complexity: O(1) since we only use space for a few variables and our result array, all of which require constant space.
  */
+
+    // if there is only 1 occurence of element we need to return that position as both first & last
+    // ex : [1] , target = 1 we need to return 0,0
         public int[] searchRange(int[] nums, int target) {
             int firstOccurrence = this.findBound(nums, target, true);
-            if (firstOccurrence == -1)
+            if (firstOccurrence == -1) {
                 return new int[] { -1, -1 };
+            }
             int lastOccurrence = this.findBound(nums, target, false);
             return new int[] { firstOccurrence, lastOccurrence };
         }
 
-        private int findBound(int[] nums, int target, boolean isFirst) {
-            int N = nums.length;
+        private int findBound(int[] nums, int target, boolean isFirst) {       int N = nums.length;
             int begin = 0, end = N - 1;
-
             while (begin <= end) {
                 int mid = (begin + end) / 2;
 
@@ -48,4 +52,11 @@ public class FindFirstAndLastPosition {
             }
             return -1;
         }
+
+    public static void main(String[] args) {
+        System.out.println(Arrays.toString(new FindFirstAndLastPosition().searchRange(new int[]{5, 7, 7, 8, 8, 10}, 8)));
+        System.out.println(Arrays.toString(new FindFirstAndLastPosition().searchRange(new int[]{5, 7, 7, 8, 8, 10}, 6)));
+        System.out.println(Arrays.toString(new FindFirstAndLastPosition().searchRange(new int[]{}, 0)));
+        System.out.println(Arrays.toString(new FindFirstAndLastPosition().searchRange(new int[]{1}, 1)));
+    }
 }

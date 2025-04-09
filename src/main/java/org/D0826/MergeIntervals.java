@@ -29,8 +29,70 @@ public class MergeIntervals {
         //Avoids Waste: No extra memory is allocated since the array is resized automatically.
     }
 
+   /* Final Complexity Analysis:
+    Time Complexity: O(n log n) (due to sorting)
+    Space Complexity: O(n) (for storing merged intervals)
+    */
+    public int[][] mergeIntervals(int[][] intervals) {
+        Arrays.sort(intervals, Comparator.comparingInt(a -> a[0]));
+        List<int[]> merged = new ArrayList<>();
+        merged.add(intervals[0]);
+        for (int i= 1; i < intervals.length; i++) {
+            if(merged.getLast()[1] >= intervals[i][0]){
+                merged.getLast()[1] = Math.max(merged.getLast()[1], intervals[i][1]);
+            }else{
+                merged.add(intervals[i]);
+            }
+        }
+        return merged.toArray(new int[0][]);
+    }
+
     public static void main(String[] args) {
+        // test for pan
+        int[][] testArray = new int[][]{{1, 3}, {2, 6}, {8, 10}, {15, 18}};
+        for(int i=0; i < testArray.length; i++)
+            for(int j=0; j< testArray[i].length; j++)
+                System.out.println(" i : "+i+" j : "+j+" testArray["+i+"]["+j+"] : "+testArray[i][j]);
+
         System.out.println(Arrays.deepToString(new MergeIntervals().merge(new int[][]{{1, 3}, {2, 6}, {8, 10}, {15, 18}})));
-        System.out.println(Arrays.deepToString(new MergeIntervals().merge(new int[][]{{1, 4}, {4, 5}})));
+        System.out.println(Arrays.deepToString(new MergeIntervals().mergeIntervals(new int[][]{{1, 4}, {4, 5}})));
+
+        System.out.println(Arrays.deepToString(new MergeIntervals().mergeSweepLineAlgorithm(new int[][]{{1, 3}, {2, 6}, {8, 10}, {15, 18}})));
+    }
+
+    public int[][] mergeSweepLineAlgorithm(int[][] intervals) {
+        // Sweepline algorithm
+        int max = 0;
+        for (int[] interval : intervals)
+            max = Math.max(interval[0], max);
+        int[] mp = new int[max + 1];
+
+        for (int[] interval : intervals)
+            mp[interval[0]] = Math.max(interval[1] + 1, mp[interval[0]]); //start = interval[0]; end = interval[1];
+
+        int r = 0;
+        int initialStart = -1;
+        int have = -1;
+        for (int i = 0; i < mp.length; i++) {
+            if (mp[i] != 0) {
+                if (initialStart == -1)
+                    initialStart = i;
+                have = Math.max(mp[i] - 1, have);
+            }
+            if (have == i) {
+                intervals[r++] = new int[] { initialStart, have };
+                initialStart = -1;
+                have = -1;
+            }
+        }
+        if (initialStart != -1) {
+            intervals[r++] = new int[] { initialStart, have };
+        }
+        if (intervals.length == r) {
+            return intervals;
+        }
+        int[][] res = new int[r][];
+        System.arraycopy(intervals, 0, res, 0, r);
+        return res;
     }
 }

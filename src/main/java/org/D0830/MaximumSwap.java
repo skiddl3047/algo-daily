@@ -42,6 +42,23 @@ public class MaximumSwap {
         // We would encounter digits in the natural order, but we wouldn’t yet know if a larger digit is available to the right.
         // Therefore, if we find a digit that we might want to swap,
         // we’d have to continue looking to the end of the array to find the largest one, making it less efficient and harder to guarantee the best possible swap.
+
+        /*
+        Let n be the number of digits in the input number.
+
+        Time complexity: O(n)
+
+        Converting the integer num to its string representation takes O(n).
+        The loop iterates over the string once from right to left, performing constant-time operations for each character, making the loop cost O(n).
+        Swap runs in constant time O(1).
+        Converting the modified string back to an integer takes O(n) time.
+        Thus, the overall time complexity is dominated by the traversal and conversions, giving us O(n).
+
+        Space complexity: O(n)
+        The numStr variable is a string representation of the input number, which requires O(n) space to store.
+        The other variables (maxDigitIndex, swapIdx1, swapIdx2) require O(1) space since they are just integer indices.
+        Therefore, the overall space complexity is O(n), mainly due to the string representation of the number.
+         */
         for (int i = n - 1; i >= 0; --i) {
             if (maxDigitIndex == -1 || numStr[i] > numStr[maxDigitIndex]) {
                 maxDigitIndex = i; // Update the index of the max digit
