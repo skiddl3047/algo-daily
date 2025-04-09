@@ -90,9 +90,8 @@ Total: 𝑂(𝑉 + 𝐸)
             int course = queue.poll();
             count++;
             for (int nextCourse : nextCourses.get(course)){
-                inDegrees[nextCourse]--;
-                if (inDegrees[nextCourse] == 0)
-                    queue.add(nextCourse);
+ 
+                
             }
         }
         return count == numCourses;

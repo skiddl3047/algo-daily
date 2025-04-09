@@ -1,26 +1,6 @@
-package org.E1220;
-/*
-Given a string s, rearrange the characters of s so that any two adjacent characters are not the same.
+package amazon.coding;
 
-Return any possible rearrangement of s or return "" if not possible.
-
-
-Example 1:
-
-Input: s = "aab"
-Output: "aba"
-Example 2:
-
-Input: s = "aaab"
-Output: ""
-
-
-Constraints:
-
-1 <= s.length <= 500
-s consists of lowercase English letters.
- */
-public class ReorganizeString {
+public class ReorganizeStringAmzn {
 
     /*
     Complexity Analysis :
@@ -33,7 +13,7 @@ public class ReorganizeString {
     Space complexity: O(k). The counter used to count the number of occurrences will incur a space complexity of O(k).
     Again, one could argue that because k <= 26, the space complexity is constant.
      */
-    public String reorganizeString(String s) {
+        public String reorganizeString(String s) {
         int[] charCounts = new int[26];
         for (char c : s.toCharArray()) {
             charCounts[c - 'a']++;
@@ -53,11 +33,11 @@ public class ReorganizeString {
 
         // Place the most frequent letter
         while (charCounts[letter] != 0) {
+            System.out.println((char)letter+'a');
             ans[index] = (char) (letter + 'a');
             index += 2;
             charCounts[letter]--;
         }
-
         // Place rest of the letters in any order
         for (int i = 0; i < charCounts.length; i++) {
             while (charCounts[i] > 0) {
@@ -72,9 +52,9 @@ public class ReorganizeString {
         return String.valueOf(ans);
     }
 
-    public static void main(String[] args) {
-        System.out.println(new ReorganizeString().reorganizeString("aabbcaabcd"));
-        System.out.println(new ReorganizeString().reorganizeString("aab"));
-        System.out.println(new ReorganizeString().reorganizeString("aaab"));
+        public static void main(String[] args) {
+        System.out.println(new ReorganizeStringAmzn().reorganizeString("aabbcaabcd"));
+        System.out.println(new ReorganizeStringAmzn().reorganizeString("aab"));
+        System.out.println(new ReorganizeStringAmzn().reorganizeString("aaab"));
     }
 }
